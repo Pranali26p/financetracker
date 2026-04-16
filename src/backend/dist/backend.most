@@ -1,0 +1,99 @@
+// Version: 1.0.0
+type Budget__230925021 = Budget__611889868;
+type Budget__611889868 =
+  {
+    amount : Nat;
+    category : ?Category__941383086;
+    createdAt : Timestamp__227479504;
+    id : RecordId__125186824;
+    month : Nat;
+    updatedAt : Timestamp__227479504;
+    userId : UserId__228936861;
+    year : Nat
+  };
+type Category__631548020 =
+  {
+    #education;
+    #entertainment;
+    #food;
+    #healthcare;
+    #others;
+    #rent;
+    #salary;
+    #shopping;
+    #travel
+  };
+type Category__941383086 = Category__631548020;
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type RecordId__125186824 = RecordId__634517021;
+type RecordId__407690172 = RecordId__634517021;
+type RecordId__634517021 = Nat;
+type Timestamp__223287625 = Timestamp__301639476;
+type Timestamp__227479504 = Timestamp__301639476;
+type Timestamp__301639476 = Int;
+type Timestamp__778030842 = Timestamp__301639476;
+type TransactionType__47031955 = {#expense; #income};
+type Transaction__488259922 = Transaction__822992244;
+type Transaction__822992244 =
+  {
+    amount : Nat;
+    category : Category__631548020;
+    createdAt : Timestamp__223287625;
+    date : Timestamp__223287625;
+    description : Text;
+    id : RecordId__407690172;
+    txType : TransactionType__47031955;
+    updatedAt : Timestamp__223287625;
+    userId : UserId__356286356
+  };
+type UserId__1043627770 = UserId__158757552;
+type UserId__158757552 = Text;
+type UserId__228936861 = UserId__158757552;
+type UserId__356286356 = UserId__158757552;
+type User__314921034 = User__98118558;
+type User__98118558 =
+  {
+    createdAt : Timestamp__778030842;
+    email : Text;
+    id : UserId__1043627770;
+    username : Text
+  };
+actor {
+  stable budgets :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Budget__230925021]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextBudgetIdCounter :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable nextTxIdCounter :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Nat]];
+      var elementIndex : Nat__490723111
+    };
+  stable transactions :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?Transaction__488259922]];
+      var elementIndex : Nat__490723111
+    };
+  stable users :
+    {
+      var root : Node__46230540<Text, User__314921034>;
+      var size : Nat__490723111
+    }
+};

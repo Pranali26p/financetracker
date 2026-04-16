@@ -1,0 +1,23 @@
+{
+  "overview": "A production-level Personal Finance Manager that lets you track income, expenses, and budgets. Features a live dashboard with charts, full transaction management with categories and filters, monthly budget tracking, and authentication.",
+  "features": [
+    "Dashboard with balance, income, and expense summary cards",
+    "Monthly income vs. expense bar chart using Recharts",
+    "Add, edit, and delete transactions with categories",
+    "Filter transactions by date and category",
+    "Set monthly budgets with progress tracking and remaining balance",
+    "Authentication UI with local storage persistence",
+    "Protected routes for logged-in users only",
+    "Responsive layout for mobile, tablet, and desktop"
+  ],
+  "category": "finance",
+  "tags": [
+    "finance",
+    "budget",
+    "transactions",
+    "dashboard",
+    "charts",
+    "personal-finance"
+  ],
+  "last_updated": "2026-04-16T05:55:06.405Z"
+}

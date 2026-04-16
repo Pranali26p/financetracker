@@ -1,0 +1,106 @@
+type UserId = text;
+type User = 
+ record {
+   createdAt: Timestamp;
+   email: text;
+   id: UserId;
+   username: text;
+ };
+type UpsertUserInput = 
+ record {
+   email: text;
+   username: text;
+ };
+type UpdateTransactionInput = 
+ record {
+   amount: nat;
+   category: Category;
+   date: Timestamp;
+   description: text;
+   id: RecordId;
+   txType: TransactionType;
+ };
+type TransactionType = 
+ variant {
+   expense;
+   income;
+ };
+type Transaction = 
+ record {
+   amount: nat;
+   category: Category;
+   createdAt: Timestamp;
+   date: Timestamp;
+   description: text;
+   id: RecordId;
+   txType: TransactionType;
+   updatedAt: Timestamp;
+   userId: UserId;
+ };
+type Timestamp = int;
+type SetBudgetInput = 
+ record {
+   amount: nat;
+   category: opt Category;
+   month: nat;
+   year: nat;
+ };
+type RecordId = nat;
+type DashboardSummary = 
+ record {
+   totalBalance: int;
+   totalExpenses: nat;
+   totalIncome: nat;
+   transactionCount: nat;
+ };
+type CreateTransactionInput = 
+ record {
+   amount: nat;
+   category: Category;
+   date: Timestamp;
+   description: text;
+   txType: TransactionType;
+ };
+type Category = 
+ variant {
+   education;
+   entertainment;
+   food;
+   healthcare;
+   others;
+   rent;
+   salary;
+   shopping;
+   travel;
+ };
+type BudgetWithSpending = 
+ record {
+   budget: Budget;
+   remaining: int;
+   spent: nat;
+ };
+type Budget = 
+ record {
+   amount: nat;
+   category: opt Category;
+   createdAt: Timestamp;
+   id: RecordId;
+   month: nat;
+   updatedAt: Timestamp;
+   userId: UserId;
+   year: nat;
+ };
+service : {
+  createTransaction: (input: CreateTransactionInput) -> (Transaction);
+  deleteBudget: (id: nat) -> ();
+  deleteTransaction: (id: nat) -> ();
+  getBudgets: () -> (vec BudgetWithSpending) query;
+  getDashboardSummary: () -> (DashboardSummary) query;
+  getTransactions: () -> (vec Transaction) query;
+  getTransactionsByCategory: (category: Category) -> (vec Transaction) query;
+  getTransactionsByMonth: (month: nat, year: nat) -> (vec Transaction) query;
+  getUser: () -> (opt User) query;
+  setBudget: (input: SetBudgetInput) -> (Budget);
+  updateTransaction: (input: UpdateTransactionInput) -> (Transaction);
+  upsertUser: (input: UpsertUserInput) -> (User);
+}
